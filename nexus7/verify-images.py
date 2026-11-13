@@ -7,6 +7,8 @@ import lzma
 from pathlib import Path
 import stat
 import struct
+import subprocess
+import tempfile
 
 
 def cpio_entries(data):
@@ -72,6 +74,16 @@ def main():
             expanded = header[5] * header[6]
             assert expanded == limit, name + ': expanded size differs from measured partition'
             info['expanded_size'] = expanded
+            if name == 'system':
+                converter = args.product_out.resolve().parents[2] / 'host/linux-x86/bin/simg2img'
+                with tempfile.TemporaryDirectory(prefix='nexus7-system-init-') as temporary:
+                    raw = Path(temporary) / 'system.raw.img'
+                    subprocess.run([str(converter), str(path), str(raw)], check=True)
+                    checked = subprocess.run(['debugfs', '-R', 'stat /init', str(raw)],
+                                             check=True, capture_output=True, text=True)
+                    assert 'Type: symlink' in checked.stdout, 'system-root /init must not be first-stage init'
+                    assert '"/system/bin/init"' in checked.stdout, 'wrong system-root init link'
+                    info['system_root_init'] = '/system/bin/init'
         result[name] = info
     output = json.dumps(result, indent=2) + '\n'
     if args.output:

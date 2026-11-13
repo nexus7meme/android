@@ -8,7 +8,7 @@
   <project name="LineageOS/android_art" path="art" revision="7f2b48980eaa3e9ebeb3fe2df55ae4beb96f8248" upstream="refs/heads/lineage-18.1" dest-branch="refs/heads/lineage-18.1" groups="pdk" />
   <project name="LineageOS/android_bionic" path="bionic" revision="b67b03356ceb6171bd0cfdb88c3ee9413c476935" upstream="refs/heads/lineage-18.1" dest-branch="refs/heads/lineage-18.1" groups="pdk" />
   <project name="LineageOS/android_bootable_recovery" path="bootable/recovery" revision="ac8c9e96627671e53a1aebdacaf9748b7241a3df" upstream="refs/heads/lineage-18.1" dest-branch="refs/heads/lineage-18.1" groups="pdk" />
-  <project name="android_build" path="build/make" revision="a080662d16033c310f63858c8e8ed09f53cc2aaa" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" groups="pdk" remote="nexus7meme">
+  <project name="android_build" path="build/make" revision="1553c4d87502f0f23920ee11e4be8a695de7c632" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" groups="pdk" remote="nexus7meme">
     <copyfile src="core/root.mk" dest="Makefile" />
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
