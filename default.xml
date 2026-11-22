@@ -354,7 +354,7 @@
   <project name="LineageOS/slackbot" path="lineage/slackbot" revision="ec8ea4d5505905da2151c2dd4608c41b510dbc07" upstream="main" dest-branch="main" groups="infra" />
   <project name="LineageOS/www" path="lineage/website" revision="ca73ca067d4277d1b2cf36f4af387bb7d795b70c" upstream="main" dest-branch="main" groups="infra" />
   <project name="android_device_asus_grouper" path="device/asus/grouper" remote="nexus7meme" revision="d7d97bf17f2ba3867569478825f932062a3b70e4" groups="local::tilapia" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" />
-  <project name="android_kernel_asus_grouper" path="kernel/asus/grouper" remote="nexus7meme" revision="16a511a1edc0518b8005510fc2802fd996d40d94" groups="local::tilapia" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" />
+  <project name="android_kernel_asus_grouper" path="kernel/asus/grouper" remote="nexus7meme" revision="8393749170ff6041abe6ffe0c64300e4fbe51a37" groups="local::tilapia" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" />
   <project name="device/common" remote="aosp" revision="6b398d7f47aae5d42d126c49f0879fa20d2ca93b" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="pdk-cw-fs,pdk" />
   <project name="device/generic/arm64" remote="aosp" revision="b2aea8576e3928e9add8b616740e56c1c5a811d2" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="pdk" />
   <project name="device/generic/armv7-a-neon" remote="aosp" revision="b13c00e79c8bc1b96b62a3fc78cee075395f6271" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="pdk" />
@@ -375,7 +375,7 @@
   <project name="device/google/cuttlefish_kernel" remote="aosp" revision="2f8dc786bb22edd195c35f9bcec4ecb009b457f0" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="device,pdk" clone-depth="1" />
   <project name="device/google/vrservices" remote="aosp" revision="19240f7c55a1fbaa721b265f76cacf7bf21109d7" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="pdk" />
   <project name="device/sample" remote="aosp" revision="5c4f1d093d7771d6ac327e87e19698cec6bf3a34" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="pdk" />
-  <project name="android_device_asus_tilapia" path="device/asus/tilapia" remote="nexus7meme" revision="7c651eb5ade0851dcc77862e7367ff8afc19ae2d" groups="local::tilapia" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" />
+  <project name="android_device_asus_tilapia" path="device/asus/tilapia" remote="nexus7meme" revision="61c71fdea8d25f75e6ce03f5522d16e5db85e3a1" groups="local::tilapia" upstream="refs/heads/nexus7-18.1" dest-branch="nexus7-18.1" />
   <project name="kernel/configs" remote="aosp" revision="e4102999005f8f3c8db1fdacfba80a2c581a72f1" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="vts,pdk" />
   <project name="kernel/prebuilts/4.19/arm64" remote="aosp" revision="332808127a212d39ef607a3241fe0ff1d48cd795" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="pdk" clone-depth="1" />
   <project name="kernel/tests" remote="aosp" revision="0b69217c71fdb04e6e2dea74443ebe3e4391104a" upstream="refs/tags/android-11.0.0_r46" dest-branch="refs/tags/android-11.0.0_r46" groups="vts,pdk" />

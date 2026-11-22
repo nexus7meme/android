@@ -10,6 +10,7 @@ import subprocess
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('source_root', type=Path)
 parser.add_argument('--clean-installed', action='store_true', help='clean installed outputs while retaining compiled objects')
+parser.add_argument('--no-oc', action='store_true', help='use stock CPU/GPU DVFS without overclock or LP overdrive')
 parser.add_argument('--jobs', type=int, default=8)
 parser.add_argument('--device', choices=('tilapia', 'grouper'), default='tilapia')
 parser.add_argument('--variant', choices=('user', 'userdebug', 'eng'), default='user')
@@ -60,5 +61,5 @@ env["MKE2FS_CONFIG"] = str(root / "system/extras/ext4_utils/mke2fs.conf")
 raise SystemExit(subprocess.run(
     ['bash', '-c', 'source build/envsetup.sh && lunch "$1" && shift && '
      + ('m installclean && ' if clean_identity else '') + 'm "$@"',
-     'tilapia-build', 'lineage_' + args.device + '-' + args.variant, '-j' + str(args.jobs)] + args.targets,
+     'tilapia-build', 'lineage_' + args.device + '-' + args.variant, '-j' + str(args.jobs)] + args.targets + (['NEXUS7_NO_OC=true'] if args.no_oc else []),
     cwd=root, env=env).returncode)

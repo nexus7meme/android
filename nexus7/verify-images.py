@@ -36,6 +36,7 @@ def main():
     parser.add_argument('product_out', type=Path)
     parser.add_argument('--device', choices=('tilapia', 'grouper'), default='tilapia')
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--no-oc', action='store_true', help='require stock-clock kernel configuration in boot and recovery')
     args = parser.parse_args()
     result = {}
     for name, limit in (('boot', 8388608), ('recovery', 12582912),
@@ -52,6 +53,26 @@ def main():
             assert (kernel_addr, ramdisk_addr, tags, page) == (0x10008000, 0x11000000, 0x10000100, 2048)
             assert len(data) <= limit and ramdisk_size > 0, name + ': image limit or missing ramdisk'
             start = page + ((kernel_size + page - 1) // page) * page
+            if args.no_oc:
+                extractor = args.product_out.resolve().parents[3] / 'kernel/asus/grouper/scripts/extract-ikconfig'
+                with tempfile.TemporaryDirectory(prefix='nexus7-nooc-') as temporary:
+                    kernel = Path(temporary) / 'zImage'
+                    kernel.write_bytes(data[page:page + kernel_size])
+                    config = subprocess.check_output(['bash', str(extractor), str(kernel)], text=True)
+                enabled = {line.split('=', 1)[0] for line in config.splitlines() if line.endswith('=y')}
+                forbidden = {
+                    'CONFIG_TEGRA3_GROUPER_CPU_OC_1400',
+                    'CONFIG_TEGRA3_GROUPER_CPU_OC_1600',
+                    'CONFIG_TEGRA3_GROUPER_CPU_OC_1800_EXPERIMENT',
+                    'CONFIG_TEGRA3_GROUPER_GPU_OC_600',
+                    'CONFIG_TEGRA3_LP_CORE_OVERDRIVE',
+                    'CONFIG_TEGRA_CPU_OVERCLOCK',
+                    'CONFIG_TEGRA_CPU_OVERCLOCK_ULTIMATE',
+                    'CONFIG_TEGRA_GPU_OVERCLOCK',
+                }
+                assert 'CONFIG_ARCH_TEGRA_3x_SOC=y' in config, 'missing embedded Tegra kernel config'
+                assert not enabled & forbidden, (name, 'overclock enabled', enabled & forbidden)
+                info['stock_clock_config_verified'] = True
             archive = lzma.decompress(data[start:start + ramdisk_size])
             entries = cpio_entries(archive)
             if name == 'boot':
